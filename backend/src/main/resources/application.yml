@@ -1,0 +1,37 @@
+spring:
+  datasource:  # mysql 사용
+    url: ${DATABASE_URL:#{'jdbc:mysql://localhost:3306/deps_local?validationQuery="select 1"&useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC&useLegacyDatetimeCode=false'}}
+    username: ${DATABASE_USERNAME:#{'root'}}
+    password: ${DATABASE_PASSWORD:#{'root'}}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-test-query: select 1 from dual
+  jpa:  # jpa 사용시 추가
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: Asia/Seoul
+        enable_lazy_load_no_trans: true
+        format_sql: true
+        hbm2ddl:
+          auto: create
+    defer-datasource-initialization: true #더미데이터 용
+    show-sql: true
+#  sql: #더미데이터 용
+#    init:
+#      mode: always
+#      data-locations: classpath:data.sql
+#      encoding: UTF-8
+  data:
+    redis:
+      host: localhost
+      port: 6379
+springdoc:
+  use-fqn: true # 정규화된 스키마명 사용 설정
+  api-docs:
+    enabled: true
+  swagger-ui:
+    display-request-duration: true  # try it out 을 했을 때 request duration 을 추가로 찍어줌
+    tags-sorter: alpha # @Tag를 알파벳 순으로 정렬
