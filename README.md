@@ -32,7 +32,7 @@
 $RANDOM_KEY = $(New-Guid).Guid
 $AZURE_ENV_NAME = "hg$(Get-Random -Max 9999)"
 $AZURE_LOCATION = "koreacentral"
-$AZURE_RESOURCE_GROUP="rg-hg-httpsgithubcomhackersground-krGet-It"
+$AZURE_RESOURCE_GROUP="{{자신의 리소스 그룹}}"
 
 azd auth login
 azd init -e $AZURE_ENV_NAME
