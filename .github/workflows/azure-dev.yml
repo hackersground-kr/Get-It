@@ -19,7 +19,7 @@ jobs:
 
       - name: Build with Gradle
         working-directory: ./backend
-        run: ./gradlew bootJar  # Adjust this command based on your Gradle build configuration
+        run: chmod +x ./gradlew && ./gradlew bootJar  # Adjust this command based on your Gradle build configuration
 
       - name: Publish Artifact
         uses: actions/upload-artifact@v2

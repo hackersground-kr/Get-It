@@ -39,14 +39,17 @@ azd init -e $AZURE_ENV_NAME
 azd env set AZURE_ENV_NAME $AZURE_ENV_NAME
 azd env set AZURE_LOCATION $AZURE_LOCATION
 azd env set AZURE_RESOURCE_GROUP $AZURE_RESOURCE_GROUP
+azd config set alpha.resourceGroupDeployments on
 azd up
 ```
 3. 다음과 같이 github workflow 시크릿을 설정합니다. (윈도우 기준)
 ```ps1
 $GITHUB_USERNAME = "{{자신의 GitHub ID}}"
+az webapp deployment list-publishing-profiles --name "$AZURE_ENV_NAME-app" --resource-group $AZURE_RESOURCE_GROUP --xml > publish_profile.xml
 
-gh secret set AZURE_APP_NAME --repo $GITHUB_USERNAME/Get-It --body "$(AZURE_ENV_NAME)"
-gh secret set AZURE_WEBAPP_PUBLISH_PROFILE --repo $GITHUB_USERNAME/Get-It --body "$(az webapp deployment list-publishing-profiles --name $AZURE_ENV_NAME --resource-group $AZURE_RESOURCE_GROUP --xml)"
+gh auth login
+gh secret set AZURE_APP_NAME --repo $GITHUB_USERNAME/Get-It --body "$AZURE_ENV_NAME"
+cat publish_profile.xml | gh secret set AZURE_WEBAPP_PUBLISH_PROFILE --repo $GITHUB_USERNAME/Get-It
 ```
 4. 다음과 같이 github workflow를 실행합니다. (윈도우 기준)
 ```ps1
