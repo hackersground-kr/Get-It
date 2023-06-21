@@ -24,6 +24,7 @@ public class CarCenter {
     String number;
     LocalTime startTime;
     LocalTime endTime;
+    Long price;
     @OneToMany(mappedBy = "carCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Charger> chargers = new ArrayList<>();
     @OneToMany(mappedBy = "carCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -36,6 +37,7 @@ public class CarCenter {
         this.number = carCenterDto.getNumber();
         this.startTime = carCenterDto.getStartTime();
         this.endTime = carCenterDto.getEndTime();
+        this.price = carCenterDto.getPrice();
 
     }
     //add charger
