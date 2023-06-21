@@ -23,6 +23,11 @@ public class CarCenterController {
         carCenterService.read(carCenterId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @GetMapping("/{carCenterId}/chargers")
+    public ResponseEntity<HttpStatus> readAllCharger(@PathVariable("carCenterId") Long carCenterId){
+        carCenterService.readAllChargers(carCenterId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
     @GetMapping
     public ResponseEntity<?> readAll(){
         List<CarCenterDto.Response> carCenterList = carCenterService.readAll();
@@ -33,7 +38,7 @@ public class CarCenterController {
         carCenterService.update(carCenterId, carCenterDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @DeleteMapping("/{placeId}")
+    @DeleteMapping("/{carCenterId}")
     public ResponseEntity<?> delete(@PathVariable("carCenterId") Long carCenterId){
         carCenterService.delete(carCenterId);
         return new ResponseEntity<>(HttpStatus.OK);
