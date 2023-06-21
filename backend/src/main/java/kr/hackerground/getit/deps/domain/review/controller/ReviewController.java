@@ -21,9 +21,9 @@ public class ReviewController {
     }
 
     @GetMapping("/{reviewId}")
-    public ResponseEntity<HttpStatus> readOne(@PathVariable("reviewId") Long reviewId){
-        reviewService.read(reviewId);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<ReviewDto.Response> readOne(@PathVariable("reviewId") Long reviewId){
+        ReviewDto.Response review = reviewService.read(reviewId);
+        return new ResponseEntity<>(review, HttpStatus.OK);
     }
 
     @GetMapping

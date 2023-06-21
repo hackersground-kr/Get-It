@@ -14,6 +14,8 @@ public class ReviewDto {
         String content;
         String title;
     }
+
+    @Getter
     public static class Response{
         Short starRate;
         String content;

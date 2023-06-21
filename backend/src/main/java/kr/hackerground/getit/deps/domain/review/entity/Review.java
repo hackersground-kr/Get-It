@@ -10,7 +10,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor @NoArgsConstructor
@@ -20,10 +20,10 @@ public class Review {
     private Long id;
 
     @CreationTimestamp
-    private LocalTime registrationDate;
+    private LocalDateTime registrationDate;
 
     @UpdateTimestamp
-    private LocalTime modificationDate;
+    private LocalDateTime modificationDate;
 
     private Short starRate;
 
