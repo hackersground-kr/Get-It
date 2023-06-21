@@ -18,12 +18,14 @@
 ### 사전 준비 사항
 
 - GitHub Account
-- Azure Free Account
 - Visual Studio Code
 - GitHub CLI
 - Azure CLI
 - Azure Developer CLI
+- Azure Account
 - Azure Resource Group
+- Node.js v18 or latest
+- Npm v7 or latest
 
 ## 시작하기
 1. 이 레포지트리를 포크합니다
@@ -51,7 +53,12 @@ gh auth login
 gh secret set AZURE_APP_NAME --repo $GITHUB_USERNAME/Get-It --body "$AZURE_ENV_NAME"
 cat publish_profile.xml | gh secret set AZURE_WEBAPP_PUBLISH_PROFILE --repo $GITHUB_USERNAME/Get-It
 ```
-4. 다음과 같이 github workflow를 실행합니다. (윈도우 기준)
+4. 다음과 같이 github actions workflow를 실행합니다. (윈도우 기준)
 ```ps1
 gh workflow run "Azure Deployment" --repo $GITHUB_USERNAME/Get-It
+```
+5. 배포가 완료될때까지 기다립니다. (10분 가량 소요됩니다.)
+6. 다음과 같이 백엔드 배포를 확인합니다.
+```ps1
+iwr https://$AZURE_ENV_NAME-app.azurewebsites.net/api/charger
 ```
