@@ -25,7 +25,7 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
-      appCommandLine: 'java -jar ./deps-0.0.1-SNAPSHOT.jar'
+      appCommandLine: 'java -jar /home/site/wwwroot/backend/build/libs/deps-0.0.1-SNAPSHOT.jar'
       appSettings: [
         {
           name: 'JAVA_OPTS'
@@ -37,14 +37,14 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
         }
         {
           name: 'DATABASE_USERNAME'
-          value: 'adminuser'
+          value: 'adminuser@${appName}-db}'
         }
         {
           name: 'DATABASE_PASSWORD'
           value: 'password123!!'
         }
       ]
-      linuxFxVersion: 'JAVA:17-java17'
+      linuxFxVersion: 'JAVA|17-java17'
     }
   }
 }
