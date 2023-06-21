@@ -8,6 +8,7 @@ import kr.hackerground.getit.deps.domain.charger.dto.ChargerDto;
 import kr.hackerground.getit.deps.domain.charger.entity.Charger;
 import kr.hackerground.getit.deps.domain.charger.entity.ChargerType;
 import kr.hackerground.getit.deps.domain.charger.entity.CurrentType;
+import kr.hackerground.getit.deps.domain.review.dto.ReviewDto;
 import kr.hackerground.getit.deps.global.error.excetion.CCarCenterNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,10 @@ public class CarCenterService {
     public List<ChargerDto.Response> readAllChargers(Long carCenterId){
         CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow(CCarCenterNotFoundException::new);
         return carCenter.getChargers().stream().map(ChargerDto.Response::new).toList();
+    }
+    public List<ReviewDto.Response> readAllReview(Long carCenterId){
+        CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow(CCarCenterNotFoundException::new);
+        return carCenter.getReviews().stream().map(ReviewDto.Response::new).toList();
     }
     //readAll
     public List<CarCenterDto.Response> readAll(){
