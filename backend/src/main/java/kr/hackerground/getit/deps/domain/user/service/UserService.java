@@ -3,6 +3,7 @@ package kr.hackerground.getit.deps.domain.user.service;
 import kr.hackerground.getit.deps.domain.user.dto.UserDto;
 import kr.hackerground.getit.deps.domain.user.entity.User;
 import kr.hackerground.getit.deps.domain.user.repository.UserRepository;
+import kr.hackerground.getit.deps.global.error.excetion.CUserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +16,11 @@ public class UserService {
     }
     //readOne
     public UserDto.Response read(Long userId){
-        return new UserDto.Response(userRepository.findById(userId).orElseThrow());
+        return new UserDto.Response(userRepository.findById(userId).orElseThrow(CUserNotFoundException::new));
     }
     //update
     public void update(Long userId, UserDto.Request userDto){
-        User user = userRepository.findById(userId).orElseThrow();
+        User user = userRepository.findById(userId).orElseThrow(CUserNotFoundException::new);
         user.update(userDto);
         userRepository.save(user);
     }

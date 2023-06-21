@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController @RequiredArgsConstructor
 public class UserController {
-    //createUser
-    //readUser
-    //updateUser
-    //deleteUser
     private final UserService userService;
     @PostMapping
     public ResponseEntity<HttpStatus> create(@RequestBody UserDto.Request userDto){
