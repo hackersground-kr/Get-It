@@ -23,6 +23,13 @@ public class ChargerController {
         chargerService.read(chargerId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    //readAllAvailableCharger
+    @GetMapping("/available")
+    public ResponseEntity<?> readAllAvailableCharger(){
+        List<ChargerDto.Response> chargerList = chargerService.readAllAvailableCharger();
+        return new ResponseEntity<>(chargerList, HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<?> readAll(){
         List<ChargerDto.Response> chargerList = chargerService.readAll();

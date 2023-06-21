@@ -3,10 +3,7 @@ package kr.hackerground.getit.deps.domain.charger.entity;
 import jakarta.persistence.*;
 import kr.hackerground.getit.deps.domain.carCenter.entity.CarCenter;
 import kr.hackerground.getit.deps.domain.charger.dto.ChargerDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor @NoArgsConstructor
@@ -16,6 +13,7 @@ public class Charger {
     private Long id;
     Integer minimumTime;
     Long volume;
+    @Setter
     CurrentType currentType;
     ChargerType chargerType;
     @ManyToOne

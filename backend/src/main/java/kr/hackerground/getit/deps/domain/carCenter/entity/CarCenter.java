@@ -34,4 +34,8 @@ public class CarCenter {
         this.endTime = carCenterDto.getEndTime();
 
     }
+    //add charger
+    public void addCharger(Charger charger) {
+        this.chargers.add(charger);
+    }
 }
