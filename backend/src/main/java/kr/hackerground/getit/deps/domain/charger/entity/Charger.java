@@ -1,6 +1,7 @@
 package kr.hackerground.getit.deps.domain.charger.entity;
 
 import jakarta.persistence.*;
+import kr.hackerground.getit.deps.domain.carCenter.entity.CarCenter;
 import kr.hackerground.getit.deps.domain.charger.dto.ChargerDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +18,8 @@ public class Charger {
     Long volume;
     CurrentType currentType;
     ChargerType chargerType;
+    @ManyToOne
+    CarCenter carCenter;
 
     public Charger(ChargerDto.Request chargerDto) {
         this.minimumTime = chargerDto.getMinimumTime();
