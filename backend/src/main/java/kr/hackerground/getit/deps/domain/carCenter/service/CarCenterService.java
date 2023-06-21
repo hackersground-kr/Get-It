@@ -6,6 +6,9 @@ import kr.hackerground.getit.deps.domain.carCenter.entity.CarCenter;
 import kr.hackerground.getit.deps.domain.carCenter.repository.CarCenterRepository;
 import kr.hackerground.getit.deps.domain.charger.dto.ChargerDto;
 import kr.hackerground.getit.deps.domain.charger.entity.Charger;
+import kr.hackerground.getit.deps.domain.charger.entity.ChargerType;
+import kr.hackerground.getit.deps.domain.charger.entity.CurrentType;
+import kr.hackerground.getit.deps.global.error.excetion.CCarCenterNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +23,12 @@ public class CarCenterService {
     }
     //readOne
     public CarCenterDto.Response read(Long carCenterId){
-        CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow();
+        CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow(CCarCenterNotFoundException::new);
         return new CarCenterDto.Response(carCenter);
     }
     //readAllChargers
     public List<ChargerDto.Response> readAllChargers(Long carCenterId){
-        CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow();
+        CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow(CCarCenterNotFoundException::new);
         return carCenter.getChargers().stream().map(ChargerDto.Response::new).toList();
     }
     //readAll
@@ -36,7 +39,7 @@ public class CarCenterService {
     }
     //update
     public void update(Long carCenterId, CarCenterDto.Request carCenterDto){
-        CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow();
+        CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow(CCarCenterNotFoundException::new);
         carCenter.update(carCenterDto);
         carCenterRepository.save(carCenter);
     }
@@ -44,5 +47,4 @@ public class CarCenterService {
     public void delete(Long placeId){
         carCenterRepository.deleteById(placeId);
     }
-
 }
