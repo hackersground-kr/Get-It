@@ -30,6 +30,8 @@ public class ImageUploader {
         String storeName = makeRandomName(originalName);
         String storePath = STORE_PATH + DELIMITER + dirName + DELIMITER + storeName;
         File file = new File(storePath);
+
+        file.mkdirs();
         multipartFile.transferTo(file);
         return new Image(storeName, originalName, ipUrl + storePath);
     }
