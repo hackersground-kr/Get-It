@@ -3,6 +3,7 @@ package kr.hackerground.getit.deps.domain.carCenter.controller;
 import kr.hackerground.getit.deps.domain.carCenter.dto.CarCenterDto;
 import kr.hackerground.getit.deps.domain.carCenter.service.CarCenterService;
 import kr.hackerground.getit.deps.domain.charger.dto.ChargerDto;
+import kr.hackerground.getit.deps.domain.review.dto.ReviewDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,11 @@ public class CarCenterController {
     public ResponseEntity<List<ChargerDto.Response>> readAllCharger(@PathVariable("carCenterId") Long carCenterId){
         List<ChargerDto.Response> chargerList = carCenterService.readAllChargers(carCenterId);
         return new ResponseEntity<>(chargerList, HttpStatus.OK);
+    }
+    @GetMapping("/{carCenterId}/reviews")
+    public ResponseEntity<List<ReviewDto.Response>> readAllReview(@PathVariable("carCenterId") Long carCenterId){
+        List<ReviewDto.Response> reviewList = carCenterService.readAllReview(carCenterId);
+        return new ResponseEntity<>(reviewList, HttpStatus.OK);
     }
     @GetMapping
     public ResponseEntity<?> readAll(){
