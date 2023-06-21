@@ -1,0 +1,36 @@
+name: Azure Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'  # Specify the Java version you are using
+
+      - name: Build with Gradle
+        working-directory: ./backend
+        run: ./gradlew bootJar  # Adjust this command based on your Gradle build configuration
+
+      - name: Publish Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-artifact
+          path: ./backend/build/libs/*.jar  # Adjust the path based on your build output
+
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: "${{ secrets.AZURE_APP_NAME }}-app" # Replace with your Azure App Service name
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # Azure App Service publish profile as a secret
+          package: backend/build/libs/*.jar  # Path to your JAR artifact
