@@ -1,9 +1,7 @@
 name: Azure Deployment
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -16,6 +14,7 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
+          distribution: 'adopt'
           java-version: '17'  # Specify the Java version you are using
 
       - name: Build with Gradle
