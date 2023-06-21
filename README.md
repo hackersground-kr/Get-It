@@ -26,7 +26,7 @@
 - Azure Resource Group
 
 ### 시작하기
-1. 이 리포지토리 포크합니다
+1. 이 리포지토리를 포크합니다
 2. 다음과 같이 에저를 프로비저닝 합니다. (윈도우 기준)
 ```ps1
 $RANDOM_KEY = $(New-Guid).Guid
