@@ -21,7 +21,7 @@ public class ChargerController {
     @GetMapping("/{chargerId}")
     public ResponseEntity<ChargerDto.Response> readOne(@PathVariable("chargerId") Long chargerId){
         ChargerDto.Response charger = chargerService.read(chargerId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(charger, HttpStatus.OK);
     }
     //readAllAvailableCharger
     @GetMapping("/available")

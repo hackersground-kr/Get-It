@@ -29,6 +29,7 @@ public class CarCenterDto {
                     .build();
         }
     }
+    @Getter
     public static class Response{
         String name;
         Double latitude;

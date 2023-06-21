@@ -1,4 +1,7 @@
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher #swagger 3.0 오류 해결
   datasource:  # mysql 사용
     url: jdbc:mysql://localhost:3306/deps_local?validationQuery="select 1"&useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC&useLegacyDatetimeCode=false'
     username: root
