@@ -6,6 +6,7 @@ import kr.hackerground.getit.deps.domain.carCenter.entity.Address;
 import kr.hackerground.getit.deps.domain.carCenter.entity.CarCenter;
 import kr.hackerground.getit.deps.domain.charger.entity.ChargerType;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -23,8 +24,9 @@ public class CarCenterDto {
         LocalTime endTime;
         Long price;
         String content;
+        MultipartFile image;
 
-        public CarCenter toEntity(Address address) {
+        public CarCenter toEntity(Address address, String imagePath) {
             return CarCenter.builder()
                     .address(address)
                     .name(name)
@@ -33,6 +35,7 @@ public class CarCenterDto {
                     .endTime(endTime)
                     .price(price)
                     .content(content)
+                    .imagePath(imagePath)
                     .build();
         }
     }
@@ -51,6 +54,7 @@ public class CarCenterDto {
         Integer chargerCount;
         Long starRateAverage;
         String content;
+        String imagePath;
         public Response(CarCenter carCenter, List<ChargerType> chargerTypes, Long starRateAverage) {
             this.id = carCenter.getId();
             this.name = carCenter.getName();
@@ -64,6 +68,7 @@ public class CarCenterDto {
             this.chargerCount = carCenter.getChargers().size();
             this.starRateAverage = starRateAverage;
             this.content = carCenter.getContent();
+            this.imagePath = carCenter.getImagePath();
         }
     }
 }

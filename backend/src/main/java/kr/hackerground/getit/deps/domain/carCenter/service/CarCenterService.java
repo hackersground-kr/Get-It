@@ -10,19 +10,24 @@ import kr.hackerground.getit.deps.domain.charger.entity.ChargerType;
 import kr.hackerground.getit.deps.domain.charger.entity.CurrentType;
 import kr.hackerground.getit.deps.domain.review.dto.ReviewDto;
 import kr.hackerground.getit.deps.domain.review.entity.Review;
+import kr.hackerground.getit.deps.global.common.imageStore.Image;
+import kr.hackerground.getit.deps.global.common.imageStore.ImageUploader;
 import kr.hackerground.getit.deps.global.error.excetion.CCarCenterNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service @RequiredArgsConstructor
 public class CarCenterService {
     private final CarCenterRepository carCenterRepository;
-    public void create(CarCenterDto.Request carCenterDto){
+    private final ImageUploader imageUploader;
+    public void create(CarCenterDto.Request carCenterDto) throws IOException {
         Address address = new Address(carCenterDto.getLatitude(), carCenterDto.getLongitude());
-        CarCenter carCenter = carCenterDto.toEntity(address);
+        Image image = imageUploader.upload(carCenterDto.getImage(), "carCenter");
+        CarCenter carCenter = carCenterDto.toEntity(address, image.getImagePath());
         carCenterRepository.save(carCenter);
     }
     //readOne
@@ -64,9 +69,10 @@ public class CarCenterService {
 
     }
     //update
-    public void update(Long carCenterId, CarCenterDto.Request carCenterDto){
+    public void update(Long carCenterId, CarCenterDto.Request carCenterDto) throws IOException {
         CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow(CCarCenterNotFoundException::new);
-        carCenter.update(carCenterDto);
+        Image image = imageUploader.upload(carCenterDto.getImage(), "carCenter");
+        carCenter.update(carCenterDto, image.getImagePath());
         carCenterRepository.save(carCenter);
     }
     //delete
