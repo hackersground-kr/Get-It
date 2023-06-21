@@ -9,11 +9,14 @@ import kr.hackerground.getit.deps.domain.charger.entity.Charger;
 import kr.hackerground.getit.deps.domain.charger.entity.ChargerType;
 import kr.hackerground.getit.deps.domain.charger.entity.CurrentType;
 import kr.hackerground.getit.deps.domain.review.dto.ReviewDto;
+import kr.hackerground.getit.deps.domain.review.entity.Review;
 import kr.hackerground.getit.deps.global.error.excetion.CCarCenterNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service @RequiredArgsConstructor
 public class CarCenterService {
     private final CarCenterRepository carCenterRepository;
@@ -25,7 +28,7 @@ public class CarCenterService {
     //readOne
     public CarCenterDto.Response read(Long carCenterId){
         CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow(CCarCenterNotFoundException::new);
-        return new CarCenterDto.Response(carCenter);
+        return new CarCenterDto.Response(carCenter, getChargerTypes(carCenter), getStarRateAverage(carCenter));
     }
     //readAllChargers
     public List<ChargerDto.Response> readAllChargers(Long carCenterId){
@@ -39,8 +42,26 @@ public class CarCenterService {
     //readAll
     public List<CarCenterDto.Response> readAll(){
         return carCenterRepository.findAll().stream()
-                .map(CarCenterDto.Response::new)
+                .map(carCenter -> {
+                    List<ChargerType> chargerTypes = getChargerTypes(carCenter);
+                    Long starRateAverage = getStarRateAverage(carCenter);
+                    return new CarCenterDto.Response(carCenter, chargerTypes, starRateAverage);
+                })
                 .toList();
+    }
+    public List<ChargerType> getChargerTypes(CarCenter carCenter){
+        return carCenter.getChargers().stream()
+                .map(Charger::getChargerType)
+                .toList();
+    }
+    public Long getStarRateAverage(CarCenter carCenter){
+        List<Long> starRates = carCenter.getReviews().stream()
+                .map(review -> {
+                    return (long)review.getStarRate();
+                }).toList();
+        //starRates의 average
+        return starRates.stream().mapToLong(Long::longValue).sum() / starRates.size();
+
     }
     //update
     public void update(Long carCenterId, CarCenterDto.Request carCenterDto){

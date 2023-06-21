@@ -29,6 +29,7 @@ public class CarCenter {
     List<Charger> chargers = new ArrayList<>();
     @OneToMany(mappedBy = "carCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Review> reviews = new ArrayList<>();
+    String content;
 
     public void update(CarCenterDto.Request carCenterDto) {
         this.name = carCenterDto.getName();
@@ -38,6 +39,7 @@ public class CarCenter {
         this.startTime = carCenterDto.getStartTime();
         this.endTime = carCenterDto.getEndTime();
         this.price = carCenterDto.getPrice();
+        this.content = carCenterDto.getContent();
 
     }
     //add charger
