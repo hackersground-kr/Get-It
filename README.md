@@ -24,10 +24,8 @@
 - Azure Developer CLI
 - Azure Account
 - Azure Resource Group
-- Node.js v18 or latest
-- Npm v7 or latest
 
-## 시작하기
+### 시작하기
 1. 이 레포지트리를 포크합니다
 2. 다음과 같이 에저를 프로비저닝 합니다. (윈도우 기준)
 ```ps1
