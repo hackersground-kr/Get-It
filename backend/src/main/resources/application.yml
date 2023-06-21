@@ -1,8 +1,8 @@
 spring:
   datasource:  # mysql 사용
-    url: ${DATABASE_URL:#{'jdbc:mysql://localhost:3306/deps_local?validationQuery="select 1"&useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC&useLegacyDatetimeCode=false'}}
-    username: ${DATABASE_USERNAME:#{'root'}}
-    password: ${DATABASE_PASSWORD:#{'root'}}
+    url: jdbc:mysql://localhost:3306/deps_local?validationQuery="select 1"&useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC&useLegacyDatetimeCode=false'
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1 from dual
@@ -19,11 +19,11 @@ spring:
           auto: create
     defer-datasource-initialization: true #더미데이터 용
     show-sql: true
-#  sql: #더미데이터 용
-#    init:
-#      mode: always
-#      data-locations: classpath:data.sql
-#      encoding: UTF-8
+  sql: #더미데이터 용
+    init:
+      mode: always
+      data-locations: classpath:data.sql
+      encoding: UTF-8
   data:
     redis:
       host: localhost
