@@ -3,6 +3,7 @@ package kr.hackerground.getit.deps.domain.review.entity;
 import jakarta.persistence.*;
 import kr.hackerground.getit.deps.domain.carCenter.entity.CarCenter;
 import kr.hackerground.getit.deps.domain.review.dto.ReviewDto;
+import kr.hackerground.getit.deps.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,9 @@ public class Review {
     private String content;
 
     private String title;
+
+    @ManyToOne @Setter
+    private User user;
 
     @ManyToOne @Setter
     private CarCenter carCenter;
