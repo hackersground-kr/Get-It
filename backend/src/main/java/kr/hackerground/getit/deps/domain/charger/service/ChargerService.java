@@ -8,9 +8,11 @@ import kr.hackerground.getit.deps.domain.charger.entity.CurrentType;
 import kr.hackerground.getit.deps.domain.charger.repository.ChargerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 @Service @RequiredArgsConstructor
+@RequestMapping("/api")
 public class ChargerService {
     private final ChargerRepository chargerRepository;
     private final CarCenterRepository carCenterRepository;
