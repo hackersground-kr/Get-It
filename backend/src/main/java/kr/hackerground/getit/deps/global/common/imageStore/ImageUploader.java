@@ -7,8 +7,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.Normalizer;
 import java.util.Objects;
 import java.util.UUID;
@@ -25,13 +29,14 @@ public class ImageUploader {
 
     private static final String DELIMITER = "/";
 
-    public Image upload(MultipartFile multipartFile, String dirName) throws IOException {
+    public Image upload(MultipartFile multipartFile, String dirName) throws Exception {
         String originalName = Objects.requireNonNull(multipartFile.getOriginalFilename());
         String storeName = makeRandomName(originalName);
         String storePath = STORE_PATH + DELIMITER + dirName + DELIMITER + storeName;
-        File file = new File(storePath);
+        Path path = Paths.get(storePath).toAbsolutePath();
+        File file = path.toFile();
 
-        file.mkdirs();
+        file.getParentFile().mkdirs();
         multipartFile.transferTo(file);
         return new Image(storeName, originalName, ipUrl + storePath);
     }
