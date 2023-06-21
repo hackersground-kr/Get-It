@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class CarCenterService {
     private final CarCenterRepository carCenterRepository;
     private final ImageUploader imageUploader;
-    public void create(CarCenterDto.Request carCenterDto) throws IOException {
+    public void create(CarCenterDto.Request carCenterDto) throws Exception {
         Address address = new Address(carCenterDto.getLatitude(), carCenterDto.getLongitude());
         Image image = imageUploader.upload(carCenterDto.getImage(), "carCenter");
         CarCenter carCenter = carCenterDto.toEntity(address, image.getImagePath());
@@ -74,7 +74,7 @@ public class CarCenterService {
 
     }
     //update
-    public void update(Long carCenterId, CarCenterDto.Request carCenterDto) throws IOException {
+    public void update(Long carCenterId, CarCenterDto.Request carCenterDto) throws Exception {
         CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow(CCarCenterNotFoundException::new);
         Image image = imageUploader.upload(carCenterDto.getImage(), "carCenter");
         carCenter.update(carCenterDto, image.getImagePath());
