@@ -4,8 +4,9 @@ import kr.hackerground.getit.deps.domain.carCenter.dto.CarCenterDto;
 import kr.hackerground.getit.deps.domain.carCenter.entity.Address;
 import kr.hackerground.getit.deps.domain.carCenter.entity.CarCenter;
 import kr.hackerground.getit.deps.domain.carCenter.repository.CarCenterRepository;
+import kr.hackerground.getit.deps.domain.charger.dto.ChargerDto;
+import kr.hackerground.getit.deps.domain.charger.entity.Charger;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,11 @@ public class CarCenterService {
     public CarCenterDto.Response read(Long carCenterId){
         CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow();
         return new CarCenterDto.Response(carCenter);
+    }
+    //readAllChargers
+    public List<ChargerDto.Response> readAllChargers(Long carCenterId){
+        CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow();
+        return carCenter.getChargers().stream().map(ChargerDto.Response::new).toList();
     }
     //readAll
     public List<CarCenterDto.Response> readAll(){
