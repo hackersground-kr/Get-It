@@ -17,6 +17,7 @@ public class CarCenterDto {
         String number;
         LocalTime startTime;
         LocalTime endTime;
+        Long price;
 
         public CarCenter toEntity(Address address) {
             return CarCenter.builder()
@@ -35,6 +36,7 @@ public class CarCenterDto {
         String number;
         LocalTime startTime;
         LocalTime endTime;
+        Long price;
         public Response(CarCenter carCenter) {
             this.name = carCenter.getName();
             this.latitude = carCenter.getAddress().getLatitude();
@@ -42,6 +44,7 @@ public class CarCenterDto {
             this.number = carCenter.getNumber();
             this.startTime = carCenter.getStartTime();
             this.endTime = carCenter.getEndTime();
+            this.price = carCenter.getPrice();
         }
     }
 }
