@@ -1,7 +1,7 @@
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
-#import "WithKakaoSDK.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -33,12 +33,4 @@
   return true;
 }
 
-
-- (BOOL)application:(UIApplication *)app
-     openURL:(NSURL *)url
-     options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-
-
- return NO;
-}
 @end
