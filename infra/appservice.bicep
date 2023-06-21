@@ -25,25 +25,7 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
-      appCommandLine: 'java -jar /home/site/wwwroot/app.jar --spring.sql.init.mode=always --spring.sql.init.data-locations:classpath:data.sql --spring.sql.init.encoding: UTF-8'
-      appSettings: [
-        {
-          name: 'JAVA_OPTS'
-          value: '-XX:+UseContainerSupport -XX:MaxRAMPercentage=75'
-        }
-        {
-          name: 'DATABASE_URL'
-          value: 'jdbc:mysql://${appName}-db.mysql.database.azure.com/deps'
-        }
-        {
-          name: 'DATABASE_USERNAME'
-          value: 'adminuser@${appName}-db'
-        }
-        {
-          name: 'DATABASE_PASSWORD'
-          value: 'password123!!'
-        }
-      ]
+      appCommandLine: 'java -jar /home/site/wwwroot/app.jar --spring.datasource.url=jdbc:mysql://${appName}-db.mysql.database.azure.com/deps --spring.datasource.username=adminuser@${appName}-db --spring.datasource.password=password123!! --spring.jpa.properties.hibernate.ddl-auto=create --spring.sql.init.mode=always --spring.sql.init.data-locations=classpath:data.sql --spring.sql.init.encoding=UTF-8'
       linuxFxVersion: 'JAVA|17-java17'
     }
   }
