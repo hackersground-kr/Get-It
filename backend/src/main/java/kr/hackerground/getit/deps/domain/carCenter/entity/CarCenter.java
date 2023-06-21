@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import kr.hackerground.getit.deps.domain.carCenter.dto.CarCenterDto;
 import kr.hackerground.getit.deps.domain.charger.entity.Charger;
 import kr.hackerground.getit.deps.domain.review.entity.Review;
+import kr.hackerground.getit.deps.global.common.imageStore.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,8 +30,11 @@ public class CarCenter {
     List<Charger> chargers = new ArrayList<>();
     @OneToMany(mappedBy = "carCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Review> reviews = new ArrayList<>();
+    String content;
 
-    public void update(CarCenterDto.Request carCenterDto) {
+    String imagePath;
+
+    public void update(CarCenterDto.Request carCenterDto, String imagePath) {
         this.name = carCenterDto.getName();
         this.address.latitude = carCenterDto.getLatitude();
         this.address.longitude = carCenterDto.getLongitude();
@@ -38,6 +42,8 @@ public class CarCenter {
         this.startTime = carCenterDto.getStartTime();
         this.endTime = carCenterDto.getEndTime();
         this.price = carCenterDto.getPrice();
+        this.content = carCenterDto.getContent();
+        this.imagePath = imagePath;
 
     }
     //add charger

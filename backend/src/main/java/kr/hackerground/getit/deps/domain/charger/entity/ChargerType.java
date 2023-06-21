@@ -5,10 +5,10 @@ import lombok.RequiredArgsConstructor;
 
 @Getter @RequiredArgsConstructor
 public enum ChargerType {
-    DC_FAST("DC차데모"),
+    DC_FAST("DC"),
     AC_3("AC3상"),
-    DC_COMBO("DC콤보"),
-    FIVE_PIN("5핀");
+    DC_DEMO("DC데모"),
+    SLOW("완속");
     private final String title;
 
 }
