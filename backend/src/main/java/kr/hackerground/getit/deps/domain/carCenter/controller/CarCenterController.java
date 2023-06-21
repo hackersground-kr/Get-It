@@ -33,7 +33,7 @@ public class CarCenterController {
         carCenterService.update(carCenterId, carCenterDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @DeleteMapping("/{placeId}")
+    @DeleteMapping("/{carCenterId}")
     public ResponseEntity<?> delete(@PathVariable("carCenterId") Long carCenterId){
         carCenterService.delete(carCenterId);
         return new ResponseEntity<>(HttpStatus.OK);
