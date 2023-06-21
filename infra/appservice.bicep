@@ -25,7 +25,7 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
-      appCommandLine: 'java -jar /home/site/wwwroot/backend/build/libs/deps-0.0.1-SNAPSHOT.jar'
+      appCommandLine: 'java -jar /home/site/wwwroot/app.jar --spring.sql.init.mode=always --spring.sql.init.data-locations:classpath:data.sql --spring.sql.init.encoding: UTF-8'
       appSettings: [
         {
           name: 'JAVA_OPTS'

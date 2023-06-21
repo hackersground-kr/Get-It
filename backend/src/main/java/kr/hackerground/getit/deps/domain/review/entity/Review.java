@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import kr.hackerground.getit.deps.domain.carCenter.entity.CarCenter;
 import kr.hackerground.getit.deps.domain.review.dto.ReviewDto;
 import kr.hackerground.getit.deps.domain.user.entity.User;
+import kr.hackerground.getit.deps.global.common.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,15 +17,9 @@ import java.time.LocalDateTime;
 @Entity
 @AllArgsConstructor @NoArgsConstructor
 @Getter
-public class Review {
+public class Review extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @CreationTimestamp
-    private LocalDateTime registrationDate;
-
-    @UpdateTimestamp
-    private LocalDateTime modificationDate;
 
     private Short starRate;
 
