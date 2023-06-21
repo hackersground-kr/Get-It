@@ -21,11 +21,11 @@ public class Reservation extends BaseTimeEntity {
     @JoinColumn(name = "car_center_id", foreignKey = @ForeignKey(name = "fk_reservation_to_car_center"), nullable = false)
     private CarCenter carCenter;
     @Enumerated(EnumType.STRING)
-    RegistrationStatus registrationStatus;
+    ReservationStatus reservationStatus;
 
     public Reservation(User user, CarCenter carCenter) {
         this.user = user;
         this.carCenter = carCenter;
-        this.registrationStatus = RegistrationStatus.REGEISTERED;
+        this.reservationStatus = ReservationStatus.REGISTERED;
     }
 }
