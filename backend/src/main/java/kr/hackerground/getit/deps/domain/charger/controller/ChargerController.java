@@ -19,19 +19,19 @@ public class ChargerController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @GetMapping("/{chargerId}")
-    public ResponseEntity<HttpStatus> readOne(@PathVariable("chargerId") Long chargerId){
-        chargerService.read(chargerId);
+    public ResponseEntity<ChargerDto.Response> readOne(@PathVariable("chargerId") Long chargerId){
+        ChargerDto.Response charger = chargerService.read(chargerId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     //readAllAvailableCharger
     @GetMapping("/available")
-    public ResponseEntity<?> readAllAvailableCharger(){
+    public ResponseEntity<List<ChargerDto.Response>> readAllAvailableCharger(){
         List<ChargerDto.Response> chargerList = chargerService.readAllAvailableCharger();
         return new ResponseEntity<>(chargerList, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<?> readAll(){
+    public ResponseEntity<List<ChargerDto.Response>> readAll(){
         List<ChargerDto.Response> chargerList = chargerService.readAll();
         return new ResponseEntity<>(chargerList, HttpStatus.OK);
     }

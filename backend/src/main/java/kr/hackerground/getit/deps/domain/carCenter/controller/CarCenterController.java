@@ -2,6 +2,7 @@ package kr.hackerground.getit.deps.domain.carCenter.controller;
 
 import kr.hackerground.getit.deps.domain.carCenter.dto.CarCenterDto;
 import kr.hackerground.getit.deps.domain.carCenter.service.CarCenterService;
+import kr.hackerground.getit.deps.domain.charger.dto.ChargerDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +20,14 @@ public class CarCenterController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @GetMapping("/{carCenterId}")
-    public ResponseEntity<HttpStatus> readOne(@PathVariable("carCenterId") Long carCenterId){
-        carCenterService.read(carCenterId);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<CarCenterDto.Response> readOne(@PathVariable("carCenterId") Long carCenterId){
+        CarCenterDto.Response carCenter = carCenterService.read(carCenterId);
+        return new ResponseEntity<>(carCenter, HttpStatus.OK);
     }
     @GetMapping("/{carCenterId}/chargers")
-    public ResponseEntity<HttpStatus> readAllCharger(@PathVariable("carCenterId") Long carCenterId){
-        carCenterService.readAllChargers(carCenterId);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<List<ChargerDto.Response>> readAllCharger(@PathVariable("carCenterId") Long carCenterId){
+        List<ChargerDto.Response> chargerList = carCenterService.readAllChargers(carCenterId);
+        return new ResponseEntity<>(chargerList, HttpStatus.OK);
     }
     @GetMapping
     public ResponseEntity<?> readAll(){
