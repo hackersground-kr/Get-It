@@ -20,7 +20,7 @@ public class CarCenter {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     String name;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     Address address;
     String number;
     LocalTime startTime;
