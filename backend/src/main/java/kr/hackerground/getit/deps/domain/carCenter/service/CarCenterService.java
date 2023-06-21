@@ -7,7 +7,6 @@ import kr.hackerground.getit.deps.domain.carCenter.repository.CarCenterRepositor
 import kr.hackerground.getit.deps.domain.charger.dto.ChargerDto;
 import kr.hackerground.getit.deps.domain.charger.entity.Charger;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,13 +43,6 @@ public class CarCenterService {
     //delete
     public void delete(Long placeId){
         carCenterRepository.deleteById(placeId);
-    }
-
-    //add charger
-    public void addCharger(Long carCenterId, Charger charger){
-        CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow();
-        carCenter.addCharger(charger);
-        carCenterRepository.save(carCenter);
     }
 
 }

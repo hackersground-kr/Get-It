@@ -13,9 +13,9 @@ import java.util.List;
 @RequestMapping("/api/charger")
 public class ChargerController {
     private final ChargerService chargerService;
-    @PostMapping
-    public ResponseEntity<HttpStatus> create(@RequestBody ChargerDto.Request chargerDto){
-        chargerService.create(chargerDto);
+    @PostMapping("/{carCenterId}")
+    public ResponseEntity<HttpStatus> create(@PathVariable("carCenterId") Long carCenterId, @RequestBody ChargerDto.Request chargerDto){
+        chargerService.create(carCenterId, chargerDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @GetMapping("/{chargerId}")

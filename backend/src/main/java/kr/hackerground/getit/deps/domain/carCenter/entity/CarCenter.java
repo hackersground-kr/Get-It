@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 @AllArgsConstructor @NoArgsConstructor
@@ -23,7 +24,7 @@ public class CarCenter {
     LocalTime startTime;
     LocalTime endTime;
     @OneToMany(mappedBy = "carCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<Charger> chargers;
+    List<Charger> chargers = new ArrayList<>();
 
     public void update(CarCenterDto.Request carCenterDto) {
         this.name = carCenterDto.getName();
@@ -36,6 +37,7 @@ public class CarCenter {
     }
     //add charger
     public void addCharger(Charger charger) {
-        this.chargers.add(charger);
+        charger.setCarCenter(this);
+        charger.getCarCenter().getChargers().add(charger);
     }
 }

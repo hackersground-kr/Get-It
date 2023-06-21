@@ -19,11 +19,11 @@ spring:
           auto: create
     defer-datasource-initialization: true #더미데이터 용
     show-sql: true
-  sql: #더미데이터 용
-    init:
-      mode: always
-      data-locations: classpath:data.sql
-      encoding: UTF-8
+#  sql: #더미데이터 용
+#    init:
+#      mode: always
+#      data-locations: classpath:data.sql
+#      encoding: UTF-8
   data:
     redis:
       host: localhost

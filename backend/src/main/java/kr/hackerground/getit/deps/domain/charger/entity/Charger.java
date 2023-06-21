@@ -16,7 +16,7 @@ public class Charger {
     @Setter
     CurrentType currentType;
     ChargerType chargerType;
-    @ManyToOne
+    @ManyToOne @Setter
     CarCenter carCenter;
 
     public Charger(ChargerDto.Request chargerDto) {

@@ -1,5 +1,7 @@
 package kr.hackerground.getit.deps.domain.charger.service;
 
+import kr.hackerground.getit.deps.domain.carCenter.entity.CarCenter;
+import kr.hackerground.getit.deps.domain.carCenter.repository.CarCenterRepository;
 import kr.hackerground.getit.deps.domain.charger.dto.ChargerDto;
 import kr.hackerground.getit.deps.domain.charger.entity.Charger;
 import kr.hackerground.getit.deps.domain.charger.entity.CurrentType;
@@ -11,10 +13,14 @@ import java.util.List;
 @Service @RequiredArgsConstructor
 public class ChargerService {
     private final ChargerRepository chargerRepository;
-    public void create(ChargerDto.Request chargerDto){
+    private final CarCenterRepository carCenterRepository;
+    public void create(Long carCenterId, ChargerDto.Request chargerDto){
+        CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow();
         Charger charger = new Charger(chargerDto);
         charger.setCurrentType(CurrentType.AVAILABLE);
+        carCenter.addCharger(charger);
         chargerRepository.save(charger);
+        carCenterRepository.save(carCenter);
     }
     //readOne
     public ChargerDto.Response read(Long chargerId){
