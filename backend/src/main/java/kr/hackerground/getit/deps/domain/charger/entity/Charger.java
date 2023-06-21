@@ -13,8 +13,9 @@ public class Charger {
     private Long id;
     Integer minimumTime;
     Long volume;
-    @Setter
+    @Setter @Enumerated(EnumType.STRING)
     CurrentType currentType;
+    @Enumerated(EnumType.STRING)
     ChargerType chargerType;
     @ManyToOne @Setter
     CarCenter carCenter;
