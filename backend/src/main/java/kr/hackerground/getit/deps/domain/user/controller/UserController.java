@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+@RequestMapping("/api/user")
 @RestController @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
@@ -17,19 +17,19 @@ public class UserController {
     }
     //readOne
     @GetMapping("/{userId}")
-    public ResponseEntity<?> read(Long userId){
+    public ResponseEntity<?> read(@PathVariable(name = "userId") Long userId){
         UserDto.Response userDto = userService.read(userId);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
     //update
     @PutMapping("/{userId}")
-    public ResponseEntity<HttpStatus> update(Long userId, UserDto.Request userDto){
+    public ResponseEntity<HttpStatus> update(@PathVariable(name = "userId")Long userId, UserDto.Request userDto){
         userService.update(userId, userDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     //delete
     @DeleteMapping("/{userId}")
-    public ResponseEntity<HttpStatus> delete(Long userId){
+    public ResponseEntity<HttpStatus> delete(@PathVariable(name = "userId")Long userId){
         userService.delete(userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
