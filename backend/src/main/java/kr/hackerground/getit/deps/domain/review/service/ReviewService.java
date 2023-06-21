@@ -5,6 +5,9 @@ import kr.hackerground.getit.deps.domain.carCenter.repository.CarCenterRepositor
 import kr.hackerground.getit.deps.domain.review.dto.ReviewDto;
 import kr.hackerground.getit.deps.domain.review.entity.Review;
 import kr.hackerground.getit.deps.domain.review.repository.ReviewRepository;
+import kr.hackerground.getit.deps.domain.user.entity.User;
+import kr.hackerground.getit.deps.domain.user.repository.UserRepository;
+import kr.hackerground.getit.deps.global.error.excetion.CUserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +18,18 @@ import java.util.List;
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final CarCenterRepository carCenterRepository;
+    private final UserRepository userRepository;
 
-    public void create(Long carCenterId, ReviewDto.Request reviewDto){
+    public void create(Long carCenterId, Long userId, ReviewDto.Request reviewDto){
         CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow();
+        User user = userRepository.findById(userId).orElseThrow();
+
         Review review = new Review(reviewDto);
+
         carCenter.addReview(review);
+        user.addReview(review);
+
+        userRepository.save(user);
         reviewRepository.save(review);
         carCenterRepository.save(carCenter);
     }
@@ -37,15 +47,24 @@ public class ReviewService {
     }
 
     //update
-    public void update(Long carCenterId, ReviewDto.Request reviewDto){
-        Review review = reviewRepository.findById(carCenterId).orElseThrow();
+    public void update(Long userId, Long reviewId, ReviewDto.Request reviewDto){
+        User user = userRepository.findById(userId).orElseThrow(CUserNotFoundException::new);
+        Review review = reviewRepository.findByIdAndUser(reviewId, user).orElseThrow(
+                () -> new RuntimeException("리뷰를 작성한 사용자가 아닙니다.")
+        );
+
         review.update(reviewDto);
         reviewRepository.save(review);
     }
 
     //delete
-    public void delete(Long placeId){
-        reviewRepository.deleteById(placeId);
+    public void delete(Long userId, Long reviewId){
+        User user = userRepository.findById(userId).orElseThrow(CUserNotFoundException::new);
+        Review review = reviewRepository.findByIdAndUser(reviewId, user).orElseThrow(
+                () -> new RuntimeException("리뷰를 작성한 사용자가 아닙니다.")
+        );
+
+        reviewRepository.delete(review);
     }
 
 }

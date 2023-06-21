@@ -2,9 +2,11 @@ package kr.hackerground.getit.deps.domain.review.controller;
 
 import kr.hackerground.getit.deps.domain.review.dto.ReviewDto;
 import kr.hackerground.getit.deps.domain.review.service.ReviewService;
+import kr.hackerground.getit.deps.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +17,8 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @PostMapping("/{carCenterId}")
-    public ResponseEntity<HttpStatus> create(@PathVariable("carCenterId") Long carCenterId, @RequestBody ReviewDto.Request reviewDto){
-        reviewService.create(carCenterId, reviewDto);
+    public ResponseEntity<HttpStatus> create(@PathVariable("carCenterId") Long carCenterId, @RequestBody ReviewDto.Request reviewDto, @AuthenticationPrincipal User user){
+        reviewService.create(carCenterId, user.getId(), reviewDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -32,13 +34,13 @@ public class ReviewController {
         return new ResponseEntity<>(reviewList, HttpStatus.OK);
     }
     @PutMapping("/{reviewId}")
-    public ResponseEntity<HttpStatus> update(@PathVariable("reviewId") Long reviewId, @RequestBody ReviewDto.Request reviewDto){
-        reviewService.update(reviewId, reviewDto);
+    public ResponseEntity<HttpStatus> update(@PathVariable("reviewId") Long reviewId, @RequestBody ReviewDto.Request reviewDto, @AuthenticationPrincipal User user){
+        reviewService.update(reviewId, user.getId(), reviewDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @DeleteMapping("/{reviewId}")
-    public ResponseEntity<?> delete(@PathVariable("reviewId") Long reviewId){
-        reviewService.delete(reviewId);
+    public ResponseEntity<?> delete(@PathVariable("reviewId") Long reviewId, @AuthenticationPrincipal User user){
+        reviewService.delete(reviewId, user.getId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
