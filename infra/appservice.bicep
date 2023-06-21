@@ -37,7 +37,7 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
         }
         {
           name: 'DATABASE_USERNAME'
-          value: 'adminuser@${appName}-db}'
+          value: 'adminuser@${appName}-db'
         }
         {
           name: 'DATABASE_PASSWORD'

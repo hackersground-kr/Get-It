@@ -6,16 +6,20 @@ import kr.hackerground.getit.deps.domain.charger.dto.ChargerDto;
 import kr.hackerground.getit.deps.domain.charger.entity.Charger;
 import kr.hackerground.getit.deps.domain.charger.entity.CurrentType;
 import kr.hackerground.getit.deps.domain.charger.repository.ChargerRepository;
+import kr.hackerground.getit.deps.global.error.excetion.CCarCenterNotFoundException;
+import kr.hackerground.getit.deps.global.error.excetion.CChargerNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 @Service @RequiredArgsConstructor
+@RequestMapping("/api")
 public class ChargerService {
     private final ChargerRepository chargerRepository;
     private final CarCenterRepository carCenterRepository;
     public void create(Long carCenterId, ChargerDto.Request chargerDto){
-        CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow();
+        CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow(CCarCenterNotFoundException::new);
         Charger charger = new Charger(chargerDto);
         charger.setCurrentType(CurrentType.AVAILABLE);
         carCenter.addCharger(charger);
@@ -24,7 +28,7 @@ public class ChargerService {
     }
     //readOne
     public ChargerDto.Response read(Long chargerId){
-        return new ChargerDto.Response(chargerRepository.findById(chargerId).orElseThrow());
+        return new ChargerDto.Response(chargerRepository.findById(chargerId).orElseThrow(CChargerNotFoundException::new));
     }
     //readAllAvailableCharger
     public List<ChargerDto.Response> readAllAvailableCharger(){
@@ -41,7 +45,7 @@ public class ChargerService {
     }
     //update
     public void update(Long carCenterId, ChargerDto.Request chargerDto){
-        Charger charger = chargerRepository.findById(carCenterId).orElseThrow();
+        Charger charger = chargerRepository.findById(carCenterId).orElseThrow(CChargerNotFoundException::new);
         charger.update(chargerDto);
         chargerRepository.save(charger);
     }

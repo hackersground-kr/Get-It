@@ -12,17 +12,17 @@ VALUES (1, 35.1111, 126.1111),
        (10, 44.0001, 135.0001);
 
 -- << Car Center >> --
-INSERT INTO car_center (id, name, address_id, number, start_time, end_time)
-VALUES (1, 'Car Center 1', 1, '053-111-1111', '01:00:00','18:00:00'),
-       (2, 'Car Center 2', 2, '053-222-1111', '02:00:00','18:00:00'),
-       (3, 'Car Center 3', 3, '053-333-1111', '03:00:00','18:00:00'),
-       (4, 'Car Center 4', 4, '053-444-1111', '04:00:00','18:00:00'),
-       (5, 'Car Center 5', 5, '053-115-1111', '05:00:00','18:00:00'),
-       (6, 'Car Center 6', 6, '053-116-1111', '06:00:00','18:00:00'),
-       (7, 'Car Center 7', 7, '053-117-1111', '07:00:00','18:00:00'),
-       (8, 'Car Center 8', 8, '053-118-1111', '08:00:00','18:00:00'),
-       (9, 'Car Center 9', 9, '053-119-1111', '09:00:00','18:00:00'),
-       (10, 'Car Center 10', 10, '053-110-1111', '10:00:00','18:00:00');
+INSERT INTO car_center (id, name, address_id, number, start_time, end_time, price)
+VALUES (1, 'Car Center 1', 1, '053-111-1111', '01:00:00','18:00:00', 1000),
+       (2, 'Car Center 2', 2, '053-222-1111', '02:00:00','18:00:00', 2000),
+       (3, 'Car Center 3', 3, '053-333-1111', '03:00:00','18:00:00', 3000),
+       (4, 'Car Center 4', 4, '053-444-1111', '04:00:00','18:00:00', 4000),
+       (5, 'Car Center 5', 5, '053-115-1111', '05:00:00','18:00:00', 5000),
+       (6, 'Car Center 6', 6, '053-116-1111', '06:00:00','18:00:00', 6000),
+       (7, 'Car Center 7', 7, '053-117-1111', '07:00:00','18:00:00', 7000),
+       (8, 'Car Center 8', 8, '053-118-1111', '08:00:00','18:00:00', 8000),
+       (9, 'Car Center 9', 9, '053-119-1111', '09:00:00','18:00:00', 9000),
+       (10, 'Car Center 10', 10, '053-110-1111', '10:00:00','18:00:00', 10000);
 
 -- << Charger >> --
 INSERT INTO charger (id, car_center_id, charger_type, current_type, minimum_time, volume)
@@ -66,3 +66,36 @@ VALUES (1, 1, 'DC_FAST', 'AVAILABLE',1, 1),
        (38, 10, 'AC_3', 'AVAILABLE',1, 1),
        (39, 10, 'DC_COMBO', 'AVAILABLE',1, 1),
        (40, 10, 'FIVE_PIN', 'AVAILABLE',1, 1);
+
+-- << Review >> --
+INSERT INTO review (id, content, modification_date, registration_date, star_rate, title, car_center_id)
+VALUES (1, 'Review 1 Content', '01:00:00', '23:00:00', 1, 'Review 1', 1),
+       (2, 'Review 2 Content', '02:00:00', '23:00:00', 2, 'Review 2', 1),
+       (3, 'Review 3 Content', '03:00:00', '23:00:00', 3, 'Review 3', 1),
+       (4, 'Review 4 Content', '04:00:00', '23:00:00', 4, 'Review 4', 2),
+       (5, 'Review 5 Content', '05:00:00', '23:00:00', 5, 'Review 5', 2),
+       (6, 'Review 6 Content', '06:00:00', '23:00:00', 1, 'Review 6', 2),
+       (7, 'Review 7 Content', '07:00:00', '23:00:00', 2, 'Review 7', 3),
+       (8, 'Review 8 Content', '08:00:00', '23:00:00', 3, 'Review 8', 3),
+       (9, 'Review 9 Content', '09:00:00', '23:00:00', 4, 'Review 9', 3),
+       (10, 'Review 10 Content', '10:00:00', '23:00:00', 5, 'Review 10', 4),
+       (11, 'Review 11 Content', '11:00:00', '23:00:00', 1, 'Review 11', 4),
+       (12, 'Review 12 Content', '12:00:00', '23:00:00', 2, 'Review 12', 4),
+       (13, 'Review 13 Content', '13:00:00', '23:00:00', 3, 'Review 13', 5),
+       (14, 'Review 14 Content', '14:00:00', '23:00:00', 4, 'Review 14', 5),
+       (15, 'Review 15 Content', '15:00:00', '23:00:00', 5, 'Review 15', 5),
+       (16, 'Review 16 Content', '16:00:00', '23:00:00', 1, 'Review 16', 6),
+       (17, 'Review 17 Content', '17:00:00', '23:00:00', 2, 'Review 17', 6),
+       (18, 'Review 18 Content', '18:00:00', '23:00:00', 3, 'Review 18', 6),
+       (19, 'Review 19 Content', '19:00:00', '23:00:00', 4, 'Review 19', 7),
+       (20, 'Review 20 Content', '20:00:00', '23:00:00', 5, 'Review 20', 7),
+       (21, 'Review 21 Content', '21:00:00', '23:00:00', 1, 'Review 21', 7),
+       (22, 'Review 22 Content', '22:00:00', '23:00:00', 2, 'Review 22', 8),
+       (23, 'Review 23 Content', '23:00:00', '23:00:00', 3, 'Review 23', 8),
+       (24, 'Review 24 Content', '01:00:00', '24:00:00', 4, 'Review 24', 8),
+       (25, 'Review 25 Content', '02:00:00', '23:00:00', 5, 'Review 25', 9),
+       (26, 'Review 26 Content', '03:00:00', '23:00:00', 1, 'Review 26', 9),
+       (27, 'Review 27 Content', '04:00:00', '23:00:00', 2, 'Review 27', 9),
+       (28, 'Review 28 Content', '05:00:00', '23:00:00', 3, 'Review 28', 10),
+       (29, 'Review 29 Content', '06:00:00', '23:00:00', 4, 'Review 29', 10),
+       (30, 'Review 30 Content', '07:00:00', '23:00:00', 5, 'Review 30', 10);

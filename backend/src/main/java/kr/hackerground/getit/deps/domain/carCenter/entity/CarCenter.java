@@ -3,6 +3,7 @@ package kr.hackerground.getit.deps.domain.carCenter.entity;
 import jakarta.persistence.*;
 import kr.hackerground.getit.deps.domain.carCenter.dto.CarCenterDto;
 import kr.hackerground.getit.deps.domain.charger.entity.Charger;
+import kr.hackerground.getit.deps.domain.review.entity.Review;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,6 +27,8 @@ public class CarCenter {
     Long price;
     @OneToMany(mappedBy = "carCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Charger> chargers = new ArrayList<>();
+    @OneToMany(mappedBy = "carCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<Review> reviews = new ArrayList<>();
 
     public void update(CarCenterDto.Request carCenterDto) {
         this.name = carCenterDto.getName();
@@ -41,5 +44,10 @@ public class CarCenter {
     public void addCharger(Charger charger) {
         charger.setCarCenter(this);
         charger.getCarCenter().getChargers().add(charger);
+    }
+
+    public void addReview(Review review) {
+        review.setCarCenter(this);
+        review.getCarCenter().getReviews().add(review);
     }
 }
