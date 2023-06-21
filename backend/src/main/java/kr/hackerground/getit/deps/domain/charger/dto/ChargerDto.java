@@ -17,6 +17,7 @@ public class ChargerDto {
         CurrentType currentType;
         ChargerType chargerType;
     }
+    @Getter
     public static class Response{
         Integer minimumTime;
         Long volume;
