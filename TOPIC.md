@@ -10,7 +10,7 @@ DEPS(Daegu Electric-car Platform Service)
 
 ## 참가 동기
 
-성민 : 
+성민 : 마이크로소프트의 AZURE 서비스를 활용해서 앱 개발 부터 배포까지 하나의 프로젝트로 경험한다는게 매력적으로 다가왔던 것 같다.
 해민 :
 가희 :
 민혁 :
