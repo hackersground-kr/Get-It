@@ -64,7 +64,12 @@ public class CarCenterService {
                 .map(review -> {
                     return (long)review.getStarRate();
                 }).toList();
+
         //starRates의 average
+
+        if (starRates.size() == 0)
+            return 0L;
+
         return starRates.stream().mapToLong(Long::longValue).sum() / starRates.size();
 
     }
