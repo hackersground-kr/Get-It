@@ -1,10 +1,13 @@
 package kr.hackerground.getit.deps.domain.user.controller;
 
+import jakarta.servlet.http.HttpServletResponse;
 import kr.hackerground.getit.deps.domain.user.dto.UserDto;
+import kr.hackerground.getit.deps.domain.user.entity.User;
 import kr.hackerground.getit.deps.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/user")
 @RestController @RequiredArgsConstructor
@@ -15,6 +18,21 @@ public class UserController {
         userService.create(userDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @GetMapping("/@me")
+    public ResponseEntity<?> readMe(@AuthenticationPrincipal User user){
+        UserDto.Response userDto = userService.read(user.getId());
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<HttpStatus> login(@RequestBody UserDto.Request userDto, HttpServletResponse servletResponse) {
+        String userToken = userService.loginAndGetToken(userDto);
+
+        servletResponse.addHeader("Set-Cookie", "SESSION_TOKEN=" + userToken);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     //readOne
     @GetMapping("/{userId}")
     public ResponseEntity<?> read(@PathVariable(name = "userId") Long userId){
@@ -23,7 +41,7 @@ public class UserController {
     }
     //update
     @PutMapping("/{userId}")
-    public ResponseEntity<HttpStatus> update(@PathVariable(name = "userId")Long userId, UserDto.Request userDto){
+    public ResponseEntity<HttpStatus> update(@PathVariable(name = "userId") Long userId, UserDto.Request userDto){
         userService.update(userId, userDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
