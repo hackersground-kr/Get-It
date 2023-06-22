@@ -30,7 +30,7 @@
 - Android Virtual Device or IOS Simulator or Physical Device
 
 ### 백엔드 시작하기
-> **Info**. Github Actions와 Bicep을 사용하였습니다!
+> **Note**. Github Actions와 Bicep을 사용하였습니다!
 
 1. 이 리포지토리를 포크하고 다음 명령어로 클론합니다.
 ```ps1
