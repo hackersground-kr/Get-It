@@ -17,16 +17,17 @@ public class ReviewDto {
 
     @Getter
     public static class Response{
+
         Short starRate;
         String content;
-        String title;
+        String 이름;
 
         String userImagePath;
         String timeStamp;
         public Response(Review review) {
             this.starRate = review.getStarRate();
             this.content = review.getContent();
-            this.title = review.getTitle();
+            this.이름 = review.getTitle();
 
             this.userImagePath = review.getUser().getImagePath();
             this.timeStamp = review.getUser().getTimeStamp();
