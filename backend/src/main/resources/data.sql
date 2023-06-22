@@ -12,17 +12,18 @@ VALUES (1, 35.8804367, 128.5784586),
        (10, 35.88899386, 128.6334461);
 
 -- << Car Center >> --
-INSERT INTO car_center (id, name, address_id, number, start_time, end_time, price, content)
-VALUES (1, '다우 카센터', 1, '053-880-4367', '01:00:00','18:00:00', 1000, 'content'),
-       (2, '삼영카센타 ', 2, '053-973-3824', '02:00:00','18:00:00', 2000, 'content'),
-       (3, '동아상사', 3, '053-890-1545', '03:00:00','18:00:00', 3000, 'content'),
-       (4, '책임카센타', 4, '053-904-9722', '04:00:00','18:00:00', 4000, 'content'),
-       (5, '(주)오토세븐', 5, '053-115-4158', '05:00:00','18:00:00', 5000, 'content'),
-       (6, '현대자동차(주)대구서비스센터', 6, '053-128-5641', '06:00:00','18:00:00', 6000, 'content'),
-       (7, '한국타이어경대써비스', 7, '053-455-9181', '07:00:00','18:00:00', 7000, 'content'),
-       (8, '장가이버', 8, '053-118-2382', '08:00:00','18:00:00', 8000, 'content'),
-       (9, '세방하이드로빽', 9, '053-119-1111', '09:00:00','18:00:00', 9000, 'content'),
-       (10, '신암카센타', 10, '053-889-9386', '10:00:00','18:00:00', 10000, 'content');
+INSERT INTO `car_center` (`id`, `content`, `end_time`, `image_path`, `name`, `number`, `price`, `start_time`, `address_id`) VALUES (1, '대구 서구 원대동1가114 2', '18:00:00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7-MfrwfsV1ziBQpconJXq7J7k7s3ZuqwyMorxXOZWDXHgl6gS6RspsheM2gzU0-6al0s&usqp=CAU', '다우 카센터', '053-880-4367', 1000, '01:00:00', 1);
+INSERT INTO `car_center` (`id`, `content`, `end_time`, `image_path`, `name`, `number`, `price`, `start_time`, `address_id`) VALUES (2, '대구 서구 가르뱅이로 87', '18:00:00', 'https://mblogthumb-phinf.pstatic.net/MjAyMTA3MjBfMTQ5/MDAxNjI2NzU4NTQ1NjUw.krESnSJT0ytHsUf18yhvhB_IoUWsDkwyET8l7kDebOMg.mWNlUdHuLU90iUBkTW6MyF3Xnp8FBHb_XhJBm81iuB0g.JPEG.pcplay83/DSC_9256.jpg?type=w800', '삼영카센타', '053-973-3824', 2000, '02:00:00', 2);
+INSERT INTO `car_center` (`id`, `content`, `end_time`, `image_path`, `name`, `number`, `price`, `start_time`, `address_id`) VALUES (3, '대구 북구 신천동로 718', '18:00:00', 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMTBfMjUz%2FMDAxNjY4MDQyMTgzMjE0.9SN72muW7qYNgUWLwxoYwrUv5aWfSeRLC4EVcksH6WYg.QSAVxlPxNQG6qTaBZ1ZMJwHFLK5pWIStZyaD3flVLwcg.JPEG.syc3515%2F1668042041382.jpg&type=sc960_832', '동아상사', '053-890-1545', 3000, '03:00:00', 3);
+INSERT INTO `car_center` (`id`, `content`, `end_time`, `image_path`, `name`, `number`, `price`, `start_time`, `address_id`) VALUES (4, '대구 달성군 화원읍 성천로 142', '18:00:00', 'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200609_191%2F1591707156731r9w9Q_JPEG%2F3JIEPG2g_6iaZ6dgaUWx9BFF.jpg', '책임카센타', '053-904-9722', 4000, '04:00:00', 4);
+INSERT INTO `car_center` (`id`, `content`, `end_time`, `image_path`, `name`, `number`, `price`, `start_time`, `address_id`) VALUES (5, '대구 서구 팔달로 72-6', '18:00:00', 'https://dnvefa72aowie.cloudfront.net/origin/smb/201810/7c8ea0aae8b4495c4e199eb14c175ed2a530e21590e274c48af4426d0a576f57.jpg?q=95&s=1440x1440&t=inside', '(주)오토세븐', '053-115-4158', 5000, '05:00:00', 5);
+INSERT INTO `car_center` (`id`, `content`, `end_time`, `image_path`, `name`, `number`, `price`, `start_time`, `address_id`) VALUES (6, '대구 북구 노원동3가 735-3', '18:00:00', 'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230330_259%2F1680135538902mGnqv_JPEG%2F%25B0%25F8%25C0%25E5_%25C7%25F6%25B4%25EB_%25B0%25A3%25C6%25C7_%25BB%25E7%25C1%25F8_2.jpg', '현대자동차(주)대구서비스센터', '053-128-5641', 6000, '06:00:00', 6);
+INSERT INTO `car_center` (`id`, `content`, `end_time`, `image_path`, `name`, `number`, `price`, `start_time`, `address_id`) VALUES (7, '대구 북구 연암로 22', '18:00:00', 'https://mblogthumb-phinf.pstatic.net/20160625_90/godori_038_1466837400184HeerA_JPEG/20160625_123218.jpg?type=w800', '한국타이어경대써비스', '053-455-9181', 7000, '07:00:00', 7);
+INSERT INTO `car_center` (`id`, `content`, `end_time`, `image_path`, `name`, `number`, `price`, `start_time`, `address_id`) VALUES (8, '대구 서구 서대구로63길 39', '18:00:00', 'https://localview.co.kr/cp/thumbnail/205647985.jpg', '장가이버', '053-118-2382', 8000, '08:00:00', 8);
+INSERT INTO `car_center` (`id`, `content`, `end_time`, `image_path`, `name`, `number`, `price`, `start_time`, `address_id`) VALUES (9, '대구 달서구 염색공단천로1길 37', '18:00:00', 'https://mblogthumb-phinf.pstatic.net/MjAxOTA4MDhfMTk5/MDAxNTY1MjIzNTM0NTU1.T8n9ETWcswhMEED9jD43zLgXT408g9d7JM91ar15UPYg.mp5XCPZbotEnpzxP5OmGa_BdAyJM12JARNIW_LAg6Yog.PNG.ucar_blog/1.png?type=w800', '세방하이드로빽', '053-119-1111', 9000, '09:00:00', 9);
+INSERT INTO `car_center` (`id`, `content`, `end_time`, `image_path`, `name`, `number`, `price`, `start_time`, `address_id`) VALUES (10, '대구 동구 아양로37길 70', '18:00:00', 'https://search.pstatic.net/common/?autoRotate=true&quality=100&type=f640_380&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20190920_58%2F1568940254225O6SAz_JPEG%2FYAOVa8RVpxTfGYPSd9qAJwev.jpg', '신암카센타', '053-889-9386', 10000, '10:00:00', 10);
+
+
 
 -- << Charger >> --
 INSERT INTO charger (id, car_center_id, charger_type, current_type, minimum_time, volume)
