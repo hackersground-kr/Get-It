@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
     @PostMapping
-    public ResponseEntity<HttpStatus> create(@RequestBody UserDto.Request userDto){
+    public ResponseEntity<HttpStatus> create(@RequestBody UserDto.Request userDto) throws Exception {
         userService.create(userDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -43,7 +43,7 @@ public class UserController {
     }
     //update
     @PutMapping("/{userId}")
-    public ResponseEntity<HttpStatus> update(@PathVariable(name = "userId") Long userId, UserDto.Request userDto){
+    public ResponseEntity<HttpStatus> update(@PathVariable(name = "userId") Long userId, UserDto.Request userDto) throws Exception {
         userService.update(userId, userDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }

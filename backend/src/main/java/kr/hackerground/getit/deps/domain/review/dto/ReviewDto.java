@@ -20,10 +20,16 @@ public class ReviewDto {
         Short starRate;
         String content;
         String title;
+
+        String userImagePath;
+        String timeStamp;
         public Response(Review review) {
             this.starRate = review.getStarRate();
             this.content = review.getContent();
             this.title = review.getTitle();
+
+            this.userImagePath = review.getUser().getImagePath();
+            this.timeStamp = review.getUser().getTimeStamp();
         }
     }
 }
