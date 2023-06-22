@@ -1,5 +1,9 @@
 package kr.hackerground.getit.deps.domain.user.controller;
 
+<<<<<<< HEAD
+=======
+import jakarta.servlet.http.HttpServletResponse;
+>>>>>>> parent of 9f1c812 (Merge branch 'main' of github.com:hackersground-kr/httpsgithubcomhackersground-krGet-It)
 import kr.hackerground.getit.deps.domain.user.dto.UserDto;
 import kr.hackerground.getit.deps.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +19,24 @@ public class UserController {
         userService.create(userDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+<<<<<<< HEAD
+=======
+
+    @GetMapping("/@me")
+    public ResponseEntity<?> readMe(@AuthenticationPrincipal User user){
+        UserDto.Response userDto = userService.read(user.getId());
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<HttpStatus> login(@RequestBody UserDto.Request userDto, HttpServletResponse servletResponse) {
+        String userToken = userService.loginAndGetToken(userDto);
+
+        servletResponse.addHeader("Set-Cookie", "SESSION_TOKEN=" + userToken);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+>>>>>>> parent of 9f1c812 (Merge branch 'main' of github.com:hackersground-kr/httpsgithubcomhackersground-krGet-It)
     //readOne
     @GetMapping("/{userId}")
     public ResponseEntity<?> read(@PathVariable(name = "userId") Long userId){
