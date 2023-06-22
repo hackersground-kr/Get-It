@@ -18,22 +18,41 @@ import {
   Input,
   Skeleton,
   VStack,
+  Image,
 } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
+import StarRating from 'react-native-star-rating-widget';
+import { set } from 'react-native-reanimated';
 
 const baseURL = 'https://hg3498-app.azurewebsites.net/api/';
 
 export default function Main() {
   const [location, setLocation] = useState({
-    coords: { latitude: 0, longitude: 0 },
+    coords: { latitude: 35.90710840112608, longitude: 128.61331299999998 },
   });
+  const [rating, setRating] = useState(0);
   const [chargeLocation, setChargeLocation] = useState([]);
   const [errorMsg, setErrorMsg] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-
+  const [loading, setLoading] = useState(true);
+  const [currentCharge, setCurrentCharge] = useState({
+    chargerCount: 0,
+    chargerTypes: [],
+    content: 'content',
+    endTime: [0, 0],
+    id: 0,
+    imagePath: null,
+    latitude: null,
+    longitude: null,
+    name: '',
+    number: '',
+    price: 0,
+    starRateAverage: 0,
+    startTime: [0, 0],
+  });
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ['25%', '50%'], []);
+  const snapPoints = useMemo(() => [250, 700], [700, 250]);
   const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index);
   }, []);
@@ -54,13 +73,15 @@ export default function Main() {
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
 
-      getChargeLocation();
+      await getChargeLocation();
+      setLoading(false);
     })();
   }, []);
 
   const getChargeLocation = async () => {
-    await axios.get(`${baseURL}carCenter`).then((res) => {
+    axios.get(`${baseURL}carCenter`).then((res) => {
       setChargeLocation(res.data);
+      console.log(res.data);
     });
   };
 
@@ -86,8 +107,6 @@ export default function Main() {
       </Box>
       <Box>
         <MapView
-          showsUserLocation={true}
-          followsUserLocation={true}
           onMarkerPress={(e) => {
             console.log(e.nativeEvent);
             setModalVisible(true);
@@ -107,18 +126,24 @@ export default function Main() {
           }}
           style={styles.map}
         >
-          {chargeLocation.map((item, index) => (
-            <Marker
-              title='YIKES, Inc.'
-              description='Web Design and Development'
-              image={require('../image/marker.png')}
-              key={index}
-              coordinate={{
-                latitude: item.latitude,
-                longitude: item.longitude,
-              }}
-            />
-          ))}
+          {chargeLocation.map((item, index) => {
+            return (
+              <Marker
+                title={item.name}
+                description={item.content}
+                image={require('../image/marker.png')}
+                key={index}
+                onPress={() => {
+                  setCurrentCharge(item);
+                  console.log(item);
+                }}
+                coordinate={{
+                  latitude: item.latitude,
+                  longitude: item.longitude,
+                }}
+              />
+            );
+          })}
         </MapView>
       </Box>
       <BottomSheet
@@ -127,44 +152,85 @@ export default function Main() {
         snapPoints={snapPoints}
         onChange={handleSheetChanges}
       >
-        <View style={styles.contentContainer}>
-          <Text>Awesome 🎉</Text>
-        </View>
+        <Box style={styles.contentContainer}>
+          {loading ? (
+            <HStack
+              w='100%'
+              maxW='400'
+              space={8}
+              rounded='md'
+              _dark={{
+                borderColor: 'coolGray.500',
+              }}
+              _light={{
+                borderColor: 'coolGray.200',
+              }}
+              p='4'
+            >
+              <VStack flex='3' space='4'>
+                <Skeleton startColor='amber.300' />
+                <Skeleton.Text />
+                <HStack space='2' alignItems='center'>
+                  <Skeleton size='5' rounded='full' />
+                  <Skeleton h='3' flex='2' rounded='full' />
+                  <Skeleton
+                    h='3'
+                    flex='1'
+                    rounded='full'
+                    startColor='indigo.300'
+                  />
+                </HStack>
+              </VStack>
+              <Skeleton
+                flex='1'
+                h='150'
+                rounded='md'
+                startColor='coolGray.100'
+              />
+            </HStack>
+          ) : (
+            <HStack
+              w='100%'
+              maxW='400'
+              space={8}
+              rounded='md'
+              _dark={{
+                borderColor: 'coolGray.500',
+              }}
+              _light={{
+                borderColor: 'coolGray.200',
+              }}
+              p='4'
+            >
+              <VStack flex='3' space='4'>
+                <Skeleton startColor='amber.300' />
+                <Skeleton.Text />
+                <HStack space='2' alignItems='center'>
+                  <Skeleton size='5' rounded='full' />
+                  <Skeleton h='3' flex='2' rounded='full' />
+                  <StarRating
+                    rating={currentCharge.starRateAverage}
+                    onChange={setRating}
+                  />
+                </HStack>
+              </VStack>
+
+              <Image
+                flex='1'
+                h='150'
+                rounded='md'
+                source={{
+                  uri: currentCharge.imagePath,
+                }}
+                alt='Alternate Text'
+                size='xl'
+              />
+            </HStack>
+          )}
+        </Box>
       </BottomSheet>
-      <Box style={styles.bottomOverlay}>
-        <Center w='100%'>
-          {/* <HStack
-            w='100%'
-            maxW='400'
-            borderWidth='1'
-            space={8}
-            rounded='md'
-            _dark={{
-              borderColor: 'coolGray.500',
-            }}
-            _light={{
-              borderColor: 'coolGray.200',
-            }}
-            p='4'
-          >
-            <VStack flex='3' space='4'>
-              <Skeleton startColor='amber.300' />
-              <Skeleton.Text />
-              <HStack space='2' alignItems='center'>
-                <Skeleton size='5' rounded='full' />
-                <Skeleton h='3' flex='2' rounded='full' />
-                <Skeleton
-                  h='3'
-                  flex='1'
-                  rounded='full'
-                  startColor='indigo.300'
-                />
-              </HStack>
-            </VStack>
-            <Skeleton flex='1' h='150' rounded='md' startColor='coolGray.100' />
-          </HStack> */}
-        </Center>
-      </Box>
+
+      {/*  */}
     </Box>
   );
 }
