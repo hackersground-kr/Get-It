@@ -24,20 +24,27 @@ public class User {
     String login;
     String password;
 
+    String timeStamp;
+    String imagePath;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Review> reviews = new ArrayList<>();
 
-    public User(UserDto.Request userDto) {
+    public User(UserDto.Request userDto, String imagePath) {
         this.name = userDto.getName();
         this.email = userDto.getEmail();
         this.phoneNumber = userDto.getPhoneNumber();
         this.login = userDto.getLogin();
         this.password = userDto.getPassword();
+        this.timeStamp = userDto.getTimeStamp();
+        this.imagePath = imagePath;
     }
-    public void update(UserDto.Request userDto){
+    public void update(UserDto.Request userDto, String imagePath) {
         this.name = userDto.getName();
         this.email = userDto.getEmail();
         this.phoneNumber = userDto.getPhoneNumber();
+        this.timeStamp = userDto.getTimeStamp();
+        this.imagePath = imagePath;
     }
 
     public void addReview(Review review) {

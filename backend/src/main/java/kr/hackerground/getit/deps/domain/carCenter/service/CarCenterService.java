@@ -33,7 +33,8 @@ public class CarCenterService {
     //readOne
     public CarCenterDto.Response read(Long carCenterId){
         CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow(CCarCenterNotFoundException::new);
-        return new CarCenterDto.Response(carCenter, getChargerTypes(carCenter), getStarRateAverage(carCenter));
+        List<ReviewDto.Response> reviews = carCenter.getReviews().stream().map(ReviewDto.Response::new).toList();
+        return new CarCenterDto.Response(carCenter, getChargerTypes(carCenter), getStarRateAverage(carCenter), reviews);
     }
     //readAllChargers
     public List<ChargerDto.Response> readAllChargers(Long carCenterId){
@@ -50,7 +51,8 @@ public class CarCenterService {
                 .map(carCenter -> {
                     List<ChargerType> chargerTypes = getChargerTypes(carCenter);
                     Long starRateAverage = getStarRateAverage(carCenter);
-                    return new CarCenterDto.Response(carCenter, chargerTypes, starRateAverage);
+                    List<ReviewDto.Response> reviews = carCenter.getReviews().stream().map(ReviewDto.Response::new).toList();
+                    return new CarCenterDto.Response(carCenter, chargerTypes, starRateAverage, reviews);
                 })
                 .toList();
     }

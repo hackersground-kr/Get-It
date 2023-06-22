@@ -5,6 +5,8 @@ import jakarta.persistence.Enumerated;
 import kr.hackerground.getit.deps.domain.carCenter.entity.Address;
 import kr.hackerground.getit.deps.domain.carCenter.entity.CarCenter;
 import kr.hackerground.getit.deps.domain.charger.entity.ChargerType;
+import kr.hackerground.getit.deps.domain.review.dto.ReviewDto;
+import kr.hackerground.getit.deps.domain.user.entity.User;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -55,7 +57,10 @@ public class CarCenterDto {
         Long starRateAverage;
         String content;
         String imagePath;
-        public Response(CarCenter carCenter, List<ChargerType> chargerTypes, Long starRateAverage) {
+
+        List<ReviewDto.Response> reviews;
+
+        public Response(CarCenter carCenter, List<ChargerType> chargerTypes, Long starRateAverage, List<ReviewDto.Response> reviews) {
             this.id = carCenter.getId();
             this.name = carCenter.getName();
             this.latitude = carCenter.getAddress().getLatitude();
@@ -69,6 +74,8 @@ public class CarCenterDto {
             this.starRateAverage = starRateAverage;
             this.content = carCenter.getContent();
             this.imagePath = carCenter.getImagePath();
+
+            this.reviews = reviews;
         }
     }
 }
