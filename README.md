@@ -45,6 +45,7 @@ $AZURE_ENV_NAME = "hg$(Get-Random -Max 9999)"
 $AZURE_LOCATION = "koreacentral"
 $AZURE_RESOURCE_GROUP="{{자신의 리소스 그룹}}"
 
+az login
 azd auth login
 azd init -e $AZURE_ENV_NAME
 azd env set AZURE_ENV_NAME $AZURE_ENV_NAME
