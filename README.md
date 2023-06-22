@@ -59,12 +59,17 @@ gh auth login
 gh secret set AZURE_APP_NAME --repo $GITHUB_USERNAME/Get-It --body "$AZURE_ENV_NAME"
 cat publish_profile.xml | gh secret set AZURE_WEBAPP_PUBLISH_PROFILE --repo $GITHUB_USERNAME/Get-It
 ```
-4. 다음과 같이 github actions workflow를 실행합니다. (윈도우 기준)
+4. 포크한 리포지토리의 Github Actions를 활성화 해줍니다.
+```
+https://github.com/{{자신의 Github ID}}/Get-It/actions
+에 접속해 초록색 Enable 버튼 클릭
+```
+5. 다음과 같이 github actions workflow를 실행합니다. (윈도우 기준)
 ```ps1
 gh workflow run "Azure Deployment" --repo $GITHUB_USERNAME/Get-It
 ```
-5. 배포가 완료될때까지 기다립니다. (10분 가량 소요됩니다.)
-6. 다음과 같이 백엔드 배포를 확인합니다.
+6. 배포가 완료될때까지 기다립니다. (10분 가량 소요됩니다.)
+7. 다음과 같이 백엔드 배포를 확인합니다.
 ```ps1
 iwr https://$AZURE_ENV_NAME-app.azurewebsites.net/api/charger
 ```
@@ -94,5 +99,5 @@ npx expo start
 7. 배포가 완료된 상황에서 android 가상머신을 실행후에 'a'를 입력하면 배포 및 실행이 진행됩니다
 8. 'i'를 입력하면 ios 가상머신으로 실행됩니다.
 9. Physical Device로 실행 하기 위해서는 같은 네트워크에 연결된 환경에서 스마트폰에 expo 앱을 설치하고 생성된 QR을 찍으면 앱이 배포됩니다.
-10. 중간에 앱이 멈췄다면 터미널에서 'r'키를 눌러서 reload를 해주면 됩니다
+10.  중간에 앱이 멈췄다면 터미널에서 'r'키를 눌러서 reload를 해주면 됩니다
 
