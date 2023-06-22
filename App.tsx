@@ -8,6 +8,7 @@ import Main from './src/screen/Main';
 import Login from './src/screen/Login';
 
 import React from 'react';
+import Review from './src/screen/Review';
 
 const MainTheme = {
   ...DefaultTheme,
@@ -34,6 +35,11 @@ export default function App() {
             name='Main'
             component={Main}
             options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name='Review'
+            component={Review}
+            options={{ headerShown: true }}
           />
         </Stack.Navigator>
       </NavigationContainer>
