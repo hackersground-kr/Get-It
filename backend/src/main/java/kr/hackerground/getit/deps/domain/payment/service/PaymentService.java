@@ -1,5 +1,6 @@
 package kr.hackerground.getit.deps.domain.payment.service;
 
+import jakarta.transaction.Transactional;
 import kr.hackerground.getit.deps.domain.carCenter.entity.CarCenter;
 import kr.hackerground.getit.deps.domain.carCenter.repository.CarCenterRepository;
 import kr.hackerground.getit.deps.domain.payment.dto.PaymentDto;
@@ -19,7 +20,7 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final UserRepository userRepository;
     private final CarCenterRepository carCenterRepository;
-
+    @Transactional
     public void makePayment(Long userId, Long carCenterId, PaymentDto.Request paymentDto) {
         User user = userRepository.findById(userId).orElseThrow(CUserNotFoundException::new);
         CarCenter carCenter = carCenterRepository.findById(carCenterId).orElseThrow(CCarCenterNotFoundException::new);
@@ -27,6 +28,7 @@ public class PaymentService {
         Payment payment = paymentDto.toEntity(user, carCenter);
         paymentRepository.save(payment);
     }
+    @Transactional
     public List<PaymentDto.Response> getUsersPayments(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(CUserNotFoundException::new);
         return paymentRepository.findAllByUser(user).stream().map(PaymentDto.Response::new).toList();

@@ -16,8 +16,8 @@ import java.util.List;
 public class PaymentController {
     private final PaymentService paymentService;
     @PostMapping("/{carCenterId}")
-    public ResponseEntity<HttpStatus> makePayment(@AuthenticationPrincipal Long userId, @PathVariable(name = "carCenterId") Long carCenterId, @RequestBody PaymentDto.Request paymentDto) {
-        paymentService.makePayment(userId, carCenterId, paymentDto);
+    public ResponseEntity<HttpStatus> makePayment(@AuthenticationPrincipal User user, @PathVariable(name = "carCenterId") Long carCenterId, @RequestBody PaymentDto.Request paymentDto) {
+        paymentService.makePayment(user.getId(), carCenterId, paymentDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @GetMapping
