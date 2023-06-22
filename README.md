@@ -30,7 +30,12 @@
 - Android Virtual Device or IOS Simulator or Physical Device
 
 ### 백엔드 시작하기
-1. 이 리포지토리를 포크합니다
+1. 이 리포지토리를 포크하고 다음 명령어로 클론합니다.
+```ps1
+$GITHUB_USERNAME = "{{자신의 GitHub ID}}"
+git clone https://github.com/$GITHUB_USERNAME/Get-It.git
+cd Get-It
+```
 2. 다음과 같이 에저를 프로비저닝 합니다. (윈도우 기준)
 ```ps1
 $RANDOM_KEY = $(New-Guid).Guid
@@ -48,7 +53,6 @@ azd up
 ```
 3. 다음과 같이 github workflow 시크릿을 설정합니다. (윈도우 기준)
 ```ps1
-$GITHUB_USERNAME = "{{자신의 GitHub ID}}"
 az webapp deployment list-publishing-profiles --name "$AZURE_ENV_NAME-app" --resource-group $AZURE_RESOURCE_GROUP --xml > publish_profile.xml
 
 gh auth login
