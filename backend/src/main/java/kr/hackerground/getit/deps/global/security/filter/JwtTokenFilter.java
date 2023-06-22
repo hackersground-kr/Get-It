@@ -35,32 +35,14 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                                     FilterChain chain)
             throws ServletException, IOException {
         // Get authorization header and validate
-<<<<<<< HEAD
-        Cookie[] cookies = request.getCookies();
-        if (cookies == null) {
-            chain.doFilter(request, response);
-            return;
-        }
-
-        Optional<Cookie> sessionToken = Arrays.stream(cookies)
-                .filter(cookie -> cookie.getName().equals("SESSION_TOKEN"))
-                .findFirst();
-
-        if (sessionToken.isEmpty()) {
-=======
         String authorization = request.getHeader("Authorization");
         if (authorization == null) {
->>>>>>> 9f1c812e027d68ef7199f053878e884cb1d0ed7e
             chain.doFilter(request, response);
             return;
         }
 
         // Get jwt token and validate
-<<<<<<< HEAD
-        final String token = sessionToken.get().getValue().trim();
-=======
         final String token = authorization.trim();
->>>>>>> 9f1c812e027d68ef7199f053878e884cb1d0ed7e
         if (!jwtTokenUtil.validate(token)) {
             chain.doFilter(request, response);
             return;
