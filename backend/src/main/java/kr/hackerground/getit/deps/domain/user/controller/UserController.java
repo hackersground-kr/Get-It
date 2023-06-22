@@ -1,6 +1,7 @@
 package kr.hackerground.getit.deps.domain.user.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
+import kr.hackerground.getit.deps.domain.user.dto.TokenDto;
 import kr.hackerground.getit.deps.domain.user.dto.UserDto;
 import kr.hackerground.getit.deps.domain.user.entity.User;
 import kr.hackerground.getit.deps.domain.user.service.UserService;
@@ -26,11 +27,13 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<HttpStatus> login(@RequestBody UserDto.Request userDto, HttpServletResponse servletResponse) {
+    public ResponseEntity<TokenDto> login(@RequestBody UserDto.Request userDto, HttpServletResponse servletResponse) {
         String userToken = userService.loginAndGetToken(userDto);
+        TokenDto tokenDto = new TokenDto();
 
-        servletResponse.addHeader("Set-Cookie", "SESSION_TOKEN=" + userToken);
-        return new ResponseEntity<>(HttpStatus.OK);
+        tokenDto.setToken(userToken);
+
+        return new ResponseEntity<>(tokenDto, HttpStatus.OK);
     }
 
     //readOne
