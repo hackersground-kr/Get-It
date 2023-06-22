@@ -59,6 +59,7 @@ public class CarCenterDto {
         String imagePath;
 
         List<ReviewDto.Response> reviews;
+        String chargerType;
 
         public Response(CarCenter carCenter, List<ChargerType> chargerTypes, Long starRateAverage, List<ReviewDto.Response> reviews) {
             this.id = carCenter.getId();
@@ -76,6 +77,8 @@ public class CarCenterDto {
             this.imagePath = carCenter.getImagePath();
 
             this.reviews = reviews;
+
+            this.chargerType = chargerTypes.get(0).toString();
         }
     }
 }
