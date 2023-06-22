@@ -20,6 +20,10 @@ public class User {
     String email;
     String phoneNumber;
 
+    @Column(unique = true)
+    String login;
+    String password;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Review> reviews = new ArrayList<>();
 
@@ -27,6 +31,8 @@ public class User {
         this.name = userDto.getName();
         this.email = userDto.getEmail();
         this.phoneNumber = userDto.getPhoneNumber();
+        this.login = userDto.getLogin();
+        this.password = userDto.getPassword();
     }
     public void update(UserDto.Request userDto){
         this.name = userDto.getName();

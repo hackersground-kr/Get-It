@@ -15,6 +15,7 @@ public enum ErrorCode {
     USER_NOT_FOUND(-6008, "회원을 조회할 수 없습니다.", HttpStatus.UNAUTHORIZED),
     CAR_CENTER_NOT_FOUND(-6008, "카센터를 조회할 수 없습니다.", HttpStatus.BAD_REQUEST),
     CHARGER_NOT_FOUND(-6008, "충전기를 조회할 수 없습니다.", HttpStatus.BAD_REQUEST),
+    PASSWORD_INVALID(-6010, "비밀번호가 틀렸습니다.", HttpStatus.BAD_REQUEST),
 
     //8000 ~ : 클라이언트 에러
     ILLEGAL_ARGUMENT_ERROR(-8000, "잘못된 파라미터입니다.", HttpStatus.BAD_REQUEST),

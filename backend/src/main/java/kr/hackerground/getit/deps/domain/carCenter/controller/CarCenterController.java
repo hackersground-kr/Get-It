@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 @RestController
 @RequiredArgsConstructor
@@ -16,7 +17,7 @@ import java.util.List;
 public class CarCenterController {
     private final CarCenterService carCenterService;
     @PostMapping
-    public ResponseEntity<HttpStatus> create(@RequestBody CarCenterDto.Request carCenterDto){
+    public ResponseEntity<HttpStatus> create(@ModelAttribute("createCarCenter") CarCenterDto.Request carCenterDto) throws Exception {
         carCenterService.create(carCenterDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -41,7 +42,7 @@ public class CarCenterController {
         return new ResponseEntity<>(carCenterList, HttpStatus.OK);
     }
     @PutMapping("/{carCenterId}")
-    public ResponseEntity<HttpStatus> update(@PathVariable("carCenterId") Long carCenterId, @RequestBody CarCenterDto.Request carCenterDto){
+    public ResponseEntity<HttpStatus> update(@ModelAttribute("updateCarCenter") Long carCenterId, @RequestBody CarCenterDto.Request carCenterDto) throws Exception {
         carCenterService.update(carCenterId, carCenterDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }

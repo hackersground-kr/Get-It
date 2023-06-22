@@ -13,6 +13,8 @@ public class UserDto {
         String name;
         String email;
         String phoneNumber;
+        String login;
+        String password;
     }
     @Getter @Setter
     @NoArgsConstructor @AllArgsConstructor

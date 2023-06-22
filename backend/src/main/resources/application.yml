@@ -5,7 +5,7 @@ spring:
   datasource:  # mysql 사용
     url: jdbc:mysql://localhost:3306/deps_local?validationQuery="select 1"&useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC&useLegacyDatetimeCode=false'
     username: root
-    password: root
+    password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1 from dual
@@ -38,3 +38,6 @@ springdoc:
   swagger-ui:
     display-request-duration: true  # try it out 을 했을 때 request duration 을 추가로 찍어줌
     tags-sorter: alpha # @Tag를 알파벳 순으로 정렬
+path:
+  images: /resources/static/images
+  ipUrl: https://hg3498-app.azurewebsites.net
