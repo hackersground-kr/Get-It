@@ -27,7 +27,7 @@
 - Node js
 - npm
 - expo
-- Android Virtual Device or IOS Simulator or Physical Device
+- IOS Simulator or Physical iPhone
 
 ### 백엔드 시작하기
 > **Note**. Github Actions와 Bicep을 사용하였습니다!
@@ -99,8 +99,11 @@ npm i
 ```ps1
 npx expo start
 ```
-7. 배포가 완료된 상황에서 android 가상머신을 실행후에 'a'를 입력하면 배포 및 실행이 진행됩니다
-8. 'i'를 입력하면 ios 가상머신으로 실행됩니다.
-9. Physical Device로 실행 하기 위해서는 같은 네트워크에 연결된 환경에서 스마트폰에 expo 앱을 설치하고 생성된 QR을 찍으면 앱이 배포됩니다.
-10.  중간에 앱이 멈췄다면 터미널에서 'r'키를 눌러서 reload를 해주면 됩니다
+7. 'i'를 입력하면 ios 가상머신으로 실행됩니다.
+8. Physical iPhone으로 실행 하기 위해서 iphone App Store에 expo 앱을 설치합니다. 
+9. 동일한 네트워크에 연결 합니다 (ex. 같은 와이파이)
+10. 생성된 QR을 찍으면 expo로 이동하면서 앱이 실행됩니다.
+<img width="822" alt="스크린샷 2023-06-23 오전 6 44 37" src="https://github.com/hackersground-kr/Get-It/assets/58356850/01f0e198-4db7-478e-911b-3bdde9e31bd5">
+
+tip. 중간에 앱이 멈췄다면 터미널에서 'r'키를 눌러서 reload를 해주면 됩니다
 

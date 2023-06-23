@@ -99,10 +99,5 @@ DEPS(Daegu Electric-car Platform Service)
 
 ## 제품 소개 슬라이드
 
-[![deck0](./decks/deck0.png)](./decks/deck0.png)
-[![deck1](./decks/deck1.png)](./decks/deck1.png)
-[![deck2](./decks/deck2.png)](./decks/deck2.png)
-[![deck3](./decks/deck3.png)](./decks/deck3.png)
-[![deck4](./decks/deck4.png)](./decks/deck4.png)
-[![deck5](./decks/deck5.png)](./decks/deck5.png)
-[![deck6](./decks/deck6.png)](./decks/deck6.png)
+
+[![슬라이드](./decks/slide.pptx)](./decks/slide.pptx)
